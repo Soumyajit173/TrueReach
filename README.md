@@ -117,9 +117,19 @@ http://localhost:8080/swagger-ui/index.html
 
 ## 📘 API Specification
 
-The complete API definition is available here:
+👉 **[`openapi.json`](./openapi.json)**
 
-👉 [OpenAPI JSON](./openapi.json)
+## 📬 Postman Collection
+
+You can import and test all APIs using Postman:
+
+👉 [`TrueReach_API_v1_(JWT).postman_collection.json`](./TrueReach_API_v1_(JWT).postman_collection.json)
+
+### Steps:
+1. Open Postman  
+2. Click Import  
+3. Upload the JSON file  
+4. Start testing APIs  
 
 You can import this into:
 - Postman
