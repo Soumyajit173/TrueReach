@@ -1,28 +1,68 @@
-# 📧 Newsletter & Email Campaign Manager API
+# 📧 TrueReach — Newsletter & Email Campaign Manager API
 
-A secure and scalable backend API for managing mailing lists, creating email campaigns, and scheduling simulated email sends.  
-Built with **Java 25**, **Spring Boot**, and modern security standards, this project is designed to streamline newsletter and campaign workflows.
+A **secure, scalable, and production-style backend API** for managing mailing lists, creating email campaigns, and scheduling deliveries.
+
+Built with **Java, Spring Boot, and MongoDB**, this project demonstrates real-world backend engineering practices including authentication, pagination, filtering, and layered architecture.
+
+---
+
+## 🏗️ Architecture
+
+```mermaid
+flowchart LR
+    A[Client / Frontend] --> B[Controller Layer]
+    B --> C[Service Layer]
+    C --> D[Repository Layer]
+    D --> E[(MongoDB)]
+
+    subgraph Backend
+        B
+        C
+        D
+    end
+```
 
 ---
 
 ## 🚀 Features
 
-- 🔐 JWT Authentication & BCrypt password encryption  
-- 📋 Mailing list creation & subscriber management  
-- 📝 Campaign creation, scheduling, and sending (mocked)  
-- 🔎 Query campaigns with pagination & filters  
-- 👑 Admin endpoints for user management  
+### 🔐 Authentication & Security
+
+* JWT-based authentication
+* BCrypt password hashing
+* Role-based access control (User/Admin)
+
+### 📋 Mailing List Management
+
+* Create and manage mailing lists
+* Add/remove subscribers
+
+### 📝 Campaign Management
+
+* Create campaigns
+* Schedule campaigns
+* Send campaigns (mocked via logs)
+
+### 🔎 Filtering & Pagination
+
+* Filter campaigns by status (`DRAFT`, `SCHEDULED`, `SENT`)
+* Paginated responses for scalability
+
+### 👑 Admin Controls
+
+* Manage users
+* Create admin accounts
 
 ---
 
 ## 🔨 Tech Stack
 
-| Layer        | Technology |
-|--------------|------------|
-| Backend      | Java 25, Spring Boot, Maven |
-| Security     | Spring Security, JWT, BCrypt |
-| Database     | MongoDB, Spring Data JPA + Hibernate ODM |
-| API & Docs   | REST APIs, Swagger, Postman |
+| Layer    | Technology                    |
+| -------- | ----------------------------- |
+| Backend  | Java, Spring Boot, Maven      |
+| Security | Spring Security, JWT, BCrypt  |
+| Database | MongoDB (Spring Data MongoDB) |
+| API Docs | Swagger (OpenAPI), Postman    |
 
 ---
 
@@ -32,18 +72,16 @@ Built with **Java 25**, **Spring Boot**, and modern security standards, this pro
 TrueReach/
 ├── src/
 │   ├── main/
-│   │   ├── java/com/example/newsletter
-│   │   │   ├── config/       # Configuration classes
-│   │   │   ├── controller/   # REST controllers
-│   │   │   ├── dto/          # Data Transfer Objects
-│   │   │   ├── impl/         # Service implementations
-│   │   │   ├── model/        # Entity and domain models
-│   │   │   ├── repo/         # Repository interfaces
-│   │   │   ├── service/      # Service interfaces
+│   │   ├── java/com/guvi/projects/TrueReach
+│   │   │   ├── config/       
+│   │   │   ├── controller/   
+│   │   │   ├── dto/          
+│   │   │   ├── impl/         
+│   │   │   ├── model/        
+│   │   │   ├── repo/         
+│   │   │   ├── service/      
 │   │   └── resources/
 │   │       ├── application.properties
-├── test/
-└── README.md
 ```
 
 ---
@@ -51,38 +89,51 @@ TrueReach/
 ## ⚡ Getting Started
 
 ### Prerequisites
-- Java 17+  
-- Maven 3+  
-- MongoDB installed  
+
+* Java 17+
+* Maven
+* MongoDB
+
+---
 
 ### Installation
+
 ```bash
-# Clone repository
 git clone https://github.com/Soumyajit173/TrueReach.git
-
-# Navigate to project
 cd TrueReach
-
-# Build project
 mvn clean install
-
-# Run application
 mvn spring-boot:run
 ```
 
-### API Documentation
-Once the server is running, access Swagger UI at:  
+---
+
+## 📘 API Documentation
+
+### 🔹 Swagger UI (Local)
+
 ```
-http://localhost:8080/swagger-ui.html
+http://localhost:8080/swagger-ui/index.html
 ```
+
+## 📘 API Specification
+
+The complete API definition is available here:
+
+👉 [OpenAPI JSON](./openapi.json)
+
+You can import this into:
+- Postman
+- Swagger Editor
 
 ---
 
 ## 📡 API Endpoints
 
 ### 🔐 Auth
-**Login**  
-`POST /api/v1/auth/login`  
+
+**Login**
+`POST /api/v1/auth/login`
+
 ```json
 {
   "email": "admin@a.org",
@@ -93,11 +144,13 @@ http://localhost:8080/swagger-ui.html
 ---
 
 ### 🌐 Public APIs
-**Health Check**  
+
+**Health Check**
 `GET /api/v1/public/health`
 
-**Register User**  
-`POST /api/v1/public/users`  
+**Register User**
+`POST /api/v1/public/users`
+
 ```json
 {
   "name": "testuser",
@@ -109,102 +162,93 @@ http://localhost:8080/swagger-ui.html
 ---
 
 ### 👤 Users
-**Get Current User**  
-`GET /api/v1/users/me`
 
-**Update User**  
-`PUT /api/v1/users/me`  
-```json
-{
-  "name": "updatedUser",
-  "password": "newpassword"
-}
-```
-
-**Delete User**  
-`DELETE /api/v1/users/me`
+* `GET /api/v1/users/me`
+* `PUT /api/v1/users/me`
+* `DELETE /api/v1/users/me`
 
 ---
 
 ### 📋 Mailing Lists
-**Create Mailing List**  
-`POST /api/v1/mailing-lists?name=AdminList`
 
-**Get Mailing Lists**  
-`GET /api/v1/mailing-lists`
-
-**Add Subscriber**  
-`POST /api/v1/mailing-lists/{listId}/subscribers`  
-```json
-{
-  "email": "test@example.com",
-  "name": "John Doe"
-}
-```
-
-**Remove Subscriber**  
-`DELETE /api/v1/mailing-lists/{listId}/subscribers?email=test@example.com`
+* `POST /api/v1/mailing-lists?name=AdminList`
+* `GET /api/v1/mailing-lists`
+* `POST /api/v1/mailing-lists/{listId}/subscribers`
+* `DELETE /api/v1/mailing-lists/{listId}/subscribers`
 
 ---
 
 ### 📝 Campaigns
-**Create Campaign**  
-`POST /api/v1/campaigns`  
-```json
-{
-  "name": "Spring Sale Campaign",
-  "subject": "Huge Discounts Await!",
-  "content": "Hello users, enjoy offers.",
-  "mailingListId": "{{listId}}",
-  "status": "DRAFT"
-}
-```
 
-**Get All Campaigns (Paginated)**  
-`GET /api/v1/campaigns?page=0&size=5`
-
-**Get Campaign By ID**  
-`GET /api/v1/campaigns/{campaignId}`
-
-**Send Campaign (Mocked)**  
-`POST /api/v1/campaigns/{campaignId}/send`
-
-**Schedule Campaign**  
-`POST /api/v1/campaigns/{campaignId}/schedule?time=2026-04-15T10:00:00`
-
-**Filter Campaigns By Status**  
-`GET /api/v1/campaigns?status=SCHEDULED&page=0&size=5`
+* `POST /api/v1/campaigns`
+* `GET /api/v1/campaigns?page=0&size=5`
+* `GET /api/v1/campaigns/{campaignId}`
+* `POST /api/v1/campaigns/{campaignId}/send`
+* `POST /api/v1/campaigns/{campaignId}/schedule`
+* `GET /api/v1/campaigns?status=SCHEDULED&page=0&size=5`
 
 ---
 
-### 👑 Admin
-**Get All Users**  
-`GET /api/v1/admin/users`
+## 📊 Sample Response
 
-**Create Admin User**  
-`POST /api/v1/admin`  
 ```json
 {
-  "name": "AdminUser",
-  "password": "admin",
-  "email": "admin@a.org"
+  "campaigns": [...],
+  "currentPage": 0,
+  "totalItems": 12,
+  "totalPages": 3,
+  "pageSize": 5
 }
 ```
 
 ---
 
 ## 🔒 Security Highlights
-- JWT-based authentication for secure API access  
-- BCrypt password hashing for strong protection  
-- Role-based access control with Spring Security  
+
+* JWT authentication for secure access
+* BCrypt password encryption
+* Role-based authorization
 
 ---
 
-## 📌 Notes
-- Email sending is **simulated via logs** (no real email integration).  
-- Tech stack entries are customizable based on project needs.  
+## 🧠 Key Concepts Demonstrated
+
+* REST API design
+* Pagination with Spring Data
+* Filtering using query parameters
+* Layered architecture (Controller → Service → Repository)
+* Secure backend development
 
 ---
 
-## 🤝 Contributors
-This project is solely developed by **Soumyajit**, demonstrating strong expertise and commitment to building a secure, scalable, and maintainable newsletter and email campaign API.
+## 🔮 Future Improvements
+
+* Real email service integration (SMTP / APIs)
+* Campaign analytics dashboard
+* Search functionality
+* Role-based access control (RBAC enhancements)
+* Cloud deployment (Render / AWS)
+
+---
+
+## 📸 Screenshots
+
+![Swagger UI 1](docs/images/Swagger1.png)
+![Swagger UI 2](docs/images/Swagger2.png)
+
+```
+docs/images
+```
+
+---
+
+## 👨‍💻 Author
+
+**Soumyajit Nandi**
+GitHub: https://github.com/Soumyajit173
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub!
