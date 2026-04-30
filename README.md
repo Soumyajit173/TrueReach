@@ -252,6 +252,19 @@ docs/images
 
 ---
 
+## 🌍 Live API
+
+You can access the deployed application here:
+
+👉 https://truereach.onrender.com/swagger-ui/index.html#/
+
+### 🔹 Hosted Swagger UI
+Explore and test APIs directly:
+
+👉 https://truereach.onrender.com/swagger-ui/index.html#/
+
+---
+
 ## 👨‍💻 Author
 
 **Soumyajit Nandi**
